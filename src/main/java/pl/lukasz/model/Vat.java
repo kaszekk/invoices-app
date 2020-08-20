@@ -1,4 +1,4 @@
-package model;
+package pl.lukasz.model;
 
 public enum Vat {
     RATE_0(0f),
