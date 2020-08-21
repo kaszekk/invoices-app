@@ -8,8 +8,7 @@ import {MockInvoice} from "../../helpers/MockInvoice";
   styleUrls: ['./invoice.component.css']
 })
 export class InvoiceComponent implements OnInit {
-  // @Input() invoice: Invoice;
-  mockInvoice = MockInvoice.getMockInvoice();
+  @Input() invoice: Invoice;
 
   constructor() {
   }
