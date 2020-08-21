@@ -16,6 +16,9 @@ import pl.lukasz.repository.InvoiceRepository;
 @Service
 public class InvoiceService {
 
+  public static final String FROM_DATE_CANNOT_BE_AFTER_TO_DATE = "fromDate cannot be after toDate.";
+
+  @NonNull
   private final InvoiceRepository invoiceRepository;
 
   public Collection<Invoice> getAllInvoices() {
@@ -25,12 +28,12 @@ public class InvoiceService {
 
   public Collection<Invoice> getAllInvoicesByDate(@NonNull LocalDate fromDate, @NonNull LocalDate toDate) {
     if (fromDate.isAfter(toDate)) {
-      String message = "fromDate cannot be after toDate.";
+      String message = FROM_DATE_CANNOT_BE_AFTER_TO_DATE;
       log.error(message);
       throw new IllegalArgumentException(message);
     }
     log.debug("Getting all invoices by dates: from {} to {}", fromDate, toDate);
-    // TODO: 20/08/2020 try to build query to get result straight from database
+    // TODO: 20/08/2020 try to build jpa query to get result straight from database
     return invoiceRepository.findAll()
         .stream()
         .filter(invoice -> (invoice.getIssuedDate().compareTo(fromDate) >= 0 && invoice.getIssuedDate().compareTo(toDate) <= 0))
