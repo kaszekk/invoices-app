@@ -1,3 +1,34 @@
 <p>invoice works!
 
+<p>{{mockInvoice.id}} invoice id</p>
+<p>{{mockInvoice.number}} invoice number</p>
+<p>{{mockInvoice.issuedDate | date }} invoice issuedDate</p>
+<p>{{mockInvoice.dueDate | date}} invoice due date</p>
+<p>{{mockInvoice.number}} invoice number</p>
 
+<p>{{mockInvoice.seller.id}} invoice seller id</p>
+<p>{{mockInvoice.seller.name}} invoice seller name</p>
+<p>{{mockInvoice.seller.address}} invoice seller address</p>
+<p>{{mockInvoice.seller.taxId}} invoice seller tax id</p>
+<p>{{mockInvoice.seller.accountNumber}} invoice seller account number</p>
+<p>{{mockInvoice.seller.phoneNumber}} invoice seller phone number</p>
+<p>{{mockInvoice.seller.email}} invoice seller email </p>
+
+<p>{{mockInvoice.buyer.id}} invoice buyer id</p>
+<p>{{mockInvoice.buyer.name}} invoice buyer name</p>
+<p>{{mockInvoice.buyer.address}} invoice buyer address</p>
+<p>{{mockInvoice.buyer.taxId}} invoice buyer tax id</p>
+<p>{{mockInvoice.buyer.accountNumber}} invoice buyer account number</p>
+<p>{{mockInvoice.buyer.phoneNumber}} invoice buyer phone number</p>
+<p>{{mockInvoice.buyer.email}} invoice buyer email </p>
+
+<div *ngFor="let entry of mockInvoice.invoiceEntries ; let i = index">
+  <p> {{mockInvoice.invoiceEntries[i].id}} invoice entry id </p>
+  <p> {{mockInvoice.invoiceEntries[i].productName}} invoice product name </p>
+  <p> {{mockInvoice.invoiceEntries[i].quantity}} invoice quantity </p>
+  <p> {{mockInvoice.invoiceEntries[i].unit}} unit </p>
+  <p> {{mockInvoice.invoiceEntries[i].price}} price</p>
+  <p> {{mockInvoice.invoiceEntries[i].netValue}} nett value </p>
+  <p> {{mockInvoice.invoiceEntries[i].grossValue}} gross value </p>
+  <p> {{mockInvoice.invoiceEntries[i].vatRate}}%   vat rate </p>
+</div>

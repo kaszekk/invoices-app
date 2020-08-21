@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Invoice} from "./invoice";
+import {MockInvoice} from "../../helpers/MockInvoice";
 
 @Component({
   selector: 'app-invoice',
@@ -6,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./invoice.component.css']
 })
 export class InvoiceComponent implements OnInit {
+  // @Input() invoice: Invoice;
+  mockInvoice = MockInvoice.getMockInvoice();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

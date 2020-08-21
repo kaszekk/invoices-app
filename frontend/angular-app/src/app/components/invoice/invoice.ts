@@ -16,7 +16,7 @@ export class InvoiceEntry {
   price: number;
   netValue: number;
   grossValue: number;
-  vatRate: vatRate;
+  vatRate: Vat;
 }
 
 export class Company {
@@ -29,8 +29,8 @@ export class Company {
   email: string;
 }
 
-export enum vatRate {
-  RATE_,
+export enum Vat {
+  RATE_0,
   RATE_5,
   RATE_8,
   RATE_23
