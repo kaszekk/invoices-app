@@ -8,7 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
+@Getter
+@EqualsAndHashCode
 @AllArgsConstructor
 @ApiModel(value = "Invoice entry")
 @Entity
@@ -37,38 +41,17 @@ public class InvoiceEntry {
   @ApiModelProperty(value = "total gross value (total net value after appropriate VAT rate applied)", example = "39.99")
   private final BigDecimal grossValue;
 
-  @ApiModelProperty(value = "VAT rate to be applied to net value ie. 0.23 means 23% VAT", example = "VAT_23")
+  @ApiModelProperty(value = "VAT rate to be applied to net value ie. 0.23 means 23% VAT", example = "RATE_23")
   private final Vat vatRate;
 
-//  @JsonCreator
-//  public InvoiceEntry(@JsonProperty("id") Long id,
-//      @JsonProperty("productName") String productName,
-//      @JsonProperty("quantity") double quantity,
-//      @JsonProperty("unit") String unit,
-//      @JsonProperty("price") BigDecimal price,
-//      @JsonProperty("netValue") BigDecimal netValue,
-//      @JsonProperty("grossValue") BigDecimal grossValue,
-//      @JsonProperty("vatRate") Vat vatRate) {
-//
-//    this.id = id;
-//
-//    this.productName = productName;
-//    this.quantity = quantity;
-//    this.unit = unit;
-//    this.price = price;
-//    this.netValue = netValue;
-//    this.grossValue = grossValue;
-//    this.vatRate = vatRate;
-//  }
-//
-//  private InvoiceEntry() {
-//    this.id = null;
-//    this.productName = null;
-//    this.quantity = 0;
-//    this.unit = null;
-//    this.price = null;
-//    this.netValue = null;
-//    this.grossValue = null;
-//    this.vatRate = null;
-//  }
+  private InvoiceEntry() {
+    this.id = null;
+    this.productName = null;
+    this.quantity = 0;
+    this.unit = null;
+    this.price = null;
+    this.netValue = null;
+    this.grossValue = null;
+    this.vatRate = null;
+  }
 }

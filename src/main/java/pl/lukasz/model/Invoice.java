@@ -11,9 +11,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
-@Data
+@AllArgsConstructor
+@Getter
+@EqualsAndHashCode
 @ApiModel(value = "Invoice")
 @Entity
 public class Invoice {
@@ -41,31 +45,13 @@ public class Invoice {
   @ManyToMany(cascade = CascadeType.ALL)
   private final List<InvoiceEntry> entries;
 
-//  @JsonCreator
-//  public Invoice(@JsonProperty("id") Long id,
-//      @JsonProperty("number") String number,
-//      @JsonProperty("issuedDate") LocalDate issuedDate,
-//      @JsonProperty("dueDate") LocalDate dueDate,
-//      @JsonProperty("seller") Company seller,
-//      @JsonProperty("buyer") Company buyer,
-//      @JsonProperty("entries") List<InvoiceEntry> entries) {
-//
-//    this.id = id;
-//    this.number = number;
-//    this.issuedDate = issuedDate;
-//    this.dueDate = dueDate;
-//    this.seller = seller;
-//    this.buyer = buyer;
-//    this.entries = entries != null ? new ArrayList(entries) : new ArrayList();
-//  }
-
-//  private Invoice() {
-//    this.id = null;
-//    this.number = null;
-//    this.issuedDate = null;
-//    this.dueDate = null;
-//    this.seller = null;
-//    this.buyer = null;
-//    this.entries = null;
-//  }
+  private Invoice() {
+    this.id = null;
+    this.number = null;
+    this.issuedDate = null;
+    this.dueDate = null;
+    this.seller = null;
+    this.buyer = null;
+    this.entries = null;
+  }
 }

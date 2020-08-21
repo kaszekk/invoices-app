@@ -6,9 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 @Entity
 @ApiModel(value = "Company")
 public class Company {
@@ -36,31 +38,13 @@ public class Company {
     @ApiModelProperty(value = "Email address", example = "jsmith@mail.com")
     private final String email;
 
-//    @JsonCreator
-//    public Company(@JsonProperty("id") Long id,
-//                   @JsonProperty("name") String name,
-//                   @JsonProperty("address") String address,
-//                   @JsonProperty("taxId") String taxId,
-//                   @JsonProperty("accountNumber") String accountNumber,
-//                   @JsonProperty("phoneNumber") String phoneNumber,
-//                   @JsonProperty("email") String email) {
-//
-//        this.id = id;
-//        this.name = name;
-//        this.address = address;
-//        this.taxId = taxId;
-//        this.accountNumber = accountNumber;
-//        this.phoneNumber = phoneNumber;
-//        this.email = email;
-//    }
-
-//    private Company() {
-//        this.id = null;
-//        this.name = null;
-//        this.address = null;
-//        this.taxId = null;
-//        this.accountNumber = null;
-//        this.phoneNumber = null;
-//        this.email = null;
-//    }
+    private Company() {
+        this.id = null;
+        this.name = null;
+        this.address = null;
+        this.taxId = null;
+        this.accountNumber = null;
+        this.phoneNumber = null;
+        this.email = null;
+    }
 }

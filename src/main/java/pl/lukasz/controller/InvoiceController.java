@@ -48,7 +48,7 @@ public class InvoiceController {
   ResponseEntity<?> getInvoiceById(@PathVariable Long id) {
     log.debug("Getting an invoice by id: {}", id);
     Optional<Invoice> invoice = invoiceService.getInvoice(id);
-    if (!invoice.isPresent()) {
+    if (invoice.isEmpty()) {
       log.error("An error occurred during getting an invoice, invoice not found for passed id: {}", id);
       return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
@@ -148,7 +148,7 @@ public class InvoiceController {
   ResponseEntity<?> deleteInvoice(@PathVariable Long id) {
     log.debug("Deleting invoice by id: {}", id);
     Optional<Invoice> invoice = invoiceService.getInvoice(id);
-    if (!invoice.isPresent()) {
+    if (invoice.isEmpty()) {
       log.error("An error occurred during deleting an invoice, invoice not found for passed id: {}", id);
       return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
@@ -176,6 +176,7 @@ public class InvoiceController {
       @ApiResponse(code = 400, message = "Passed invoice is invalid."),
       @ApiResponse(code = 500, message = "Internal server error.")})
   ResponseEntity<?> saveInvoice(@RequestBody(required = false) Invoice invoice) {
+    // TODO: 21/08/2020  add validation  against:  max length, empty string etc
     if (invoice == null) {
       String message = "Invoice cannot be null.";
       log.error(message);
