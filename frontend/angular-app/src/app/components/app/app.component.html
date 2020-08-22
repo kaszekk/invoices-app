@@ -1,10 +1,12 @@
 <div id="component-box">
   <!--  <app-navigation></app-navigation>-->
   <br/>
-    <app-invoice></app-invoice>
 
-    <app-invoice-preview></app-invoice-preview>
+  <div *ngFor="let invoice of invoices" class="jumbotron col-lg-12">
+    <app-invoice [invoice]="invoice"></app-invoice>
+  </div>
 
+  <app-invoice-preview></app-invoice-preview>
   <!--  <router-outlet></router-outlet>-->
   <!--  <app-alerts></app-alerts>-->
 

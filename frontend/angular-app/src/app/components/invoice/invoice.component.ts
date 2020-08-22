@@ -10,23 +10,10 @@ import {Subject} from "rxjs";
 })
 export class InvoiceComponent implements OnInit {
   @Input()
-  invoice?: Invoice;
-  invoices: Invoice[];
-  invoiceCount: number;
-  serviceInvoice: Invoice;
-
-  constructor(private invoiceService: InvoiceService) {
-  }
+  invoice: Invoice;
 
   ngOnInit(): void {
-    this.invoiceService.getInvoice(2).subscribe(invoiceResponse => {
-      this.invoice = invoiceResponse;
-    });
-
-    this.invoiceService.getInvoices().subscribe(invoices => {
-      this.invoices = invoices;
-    });
-
   }
 
 }
+

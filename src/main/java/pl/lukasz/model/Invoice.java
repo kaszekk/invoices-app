@@ -14,10 +14,12 @@ import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 
 @AllArgsConstructor
 @Getter
 @EqualsAndHashCode
+@ToString
 @ApiModel(value = "Invoice")
 @Entity
 public class Invoice {

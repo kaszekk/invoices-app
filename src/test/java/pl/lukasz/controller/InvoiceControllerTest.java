@@ -11,7 +11,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -88,7 +87,7 @@ class InvoiceControllerTest {
     //Given
     Invoice invoice1 = InvoiceGenerator.getRandomInvoice();
     Invoice invoice2 = InvoiceGenerator.getRandomInvoice();
-    Collection<Invoice> invoices = Arrays.asList(invoice1, invoice2);
+    Collection<Invoice> invoices = List.of(invoice1, invoice2);
     when(invoiceService.getAllInvoices()).thenReturn(invoices);
 
     //When
@@ -113,7 +112,7 @@ class InvoiceControllerTest {
     Invoice invoice1 = InvoiceGenerator.getRandomInvoiceWithSpecificIssueDate(LocalDate.parse(fromDate));
     Invoice invoice2 = InvoiceGenerator.getRandomInvoiceWithSpecificIssueDate(LocalDate.parse("2018-01-15"));
     Invoice invoice3 = InvoiceGenerator.getRandomInvoiceWithSpecificIssueDate(LocalDate.parse(toDate));
-    List<Invoice> expected = Arrays.asList(invoice1, invoice2, invoice3);
+    List<Invoice> expected = List.of(invoice1, invoice2, invoice3);
     when(invoiceService.getAllInvoicesByDate(LocalDate.parse(fromDate), LocalDate.parse(toDate))).thenReturn(expected);
 
     //When
@@ -198,7 +197,7 @@ class InvoiceControllerTest {
     //Given
     Invoice invoice1 = InvoiceGenerator.getRandomInvoiceWithSpecificBuyerId(1L);
     Invoice invoice2 = InvoiceGenerator.getRandomInvoiceWithSpecificBuyerId(1L);
-    List<Invoice> expected = Arrays.asList(invoice1, invoice2);
+    List<Invoice> expected = List.of(invoice1, invoice2);
     when(invoiceService.getAllInvoicesByBuyer(1L)).thenReturn(expected);
 
     //When
@@ -237,7 +236,7 @@ class InvoiceControllerTest {
     //Given
     Invoice invoice1 = InvoiceGenerator.getRandomInvoiceWithSpecificSellerId(1L);
     Invoice invoice2 = InvoiceGenerator.getRandomInvoiceWithSpecificSellerId(1L);
-    List<Invoice> expected = Arrays.asList(invoice1, invoice2);
+    List<Invoice> expected = List.of(invoice1, invoice2);
     when(invoiceService.getAllInvoicesBySeller(1L)).thenReturn(expected);
 
     //When

@@ -48,10 +48,10 @@ public class InvoiceController {
       @ApiResponse(code = 404, message = "Invoice not found for passed id."),
       @ApiResponse(code = 500, message = "Internal server error.")})
   ResponseEntity<?> getInvoiceById(@PathVariable Long id) {
-    log.debug("Getting an invoice by id: {}", id);
+    log.info("Getting an invoice by id: {}", id);
     Optional<Invoice> invoice = invoiceService.getInvoice(id);
     if (invoice.isEmpty()) {
-      log.error("An error occurred during getting an invoice, invoice not found for passed id: {}", id);
+      log.info("An error occurred during getting an invoice, invoice not found for passed id: {}", id);
       return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
     return ResponseEntity.ok().body(invoice.get());
@@ -63,8 +63,8 @@ public class InvoiceController {
   @ApiResponses({
       @ApiResponse(code = 200, message = "OK"),
       @ApiResponse(code = 500, message = "Internal server error.")})
-  ResponseEntity<?> getAllInvoices() {
-    log.debug("Getting all invoices");
+  ResponseEntity<Collection<Invoice>> getAllInvoices() {
+    log.info("Getting all invoices");
     Collection<Invoice> invoices = invoiceService.getAllInvoices();
     return ResponseEntity.status(HttpStatus.OK).body(invoices);
   }
@@ -96,7 +96,7 @@ public class InvoiceController {
       log.error(message);
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
     }
-    log.debug("Getting all invoices by dates: from {} to {}", fromDate, toDate);
+    log.info("Getting all invoices by dates: from {} to {}", fromDate, toDate);
     Collection<Invoice> invoices = invoiceService.getAllInvoicesByDate(fromDate, toDate);
     return ResponseEntity.status(HttpStatus.OK).body(invoices);
   }
@@ -115,7 +115,7 @@ public class InvoiceController {
       log.error(message);
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
     }
-    log.debug("Getting all invoices by buyer: {}", id);
+    log.info("Getting all invoices by buyer: {}", id);
     Collection<Invoice> invoices = invoiceService.getAllInvoicesByBuyer(id);
     return ResponseEntity.status(HttpStatus.OK).body(invoices);
   }
@@ -134,7 +134,7 @@ public class InvoiceController {
       log.error(message);
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
     }
-    log.debug("Getting all invoices by seller: {}", id);
+    log.info("Getting all invoices by seller: {}", id);
     Collection<Invoice> invoices = invoiceService.getAllInvoicesBySeller(id);
     return ResponseEntity.status(HttpStatus.OK).body(invoices);
   }
@@ -148,7 +148,7 @@ public class InvoiceController {
       @ApiResponse(code = 404, message = "Invoice not found for passed id."),
       @ApiResponse(code = 500, message = "Internal server error.")})
   ResponseEntity<?> deleteInvoice(@PathVariable Long id) {
-    log.debug("Deleting invoice by id: {}", id);
+    log.info("Deleting invoice by id: {}", id);
     Optional<Invoice> invoice = invoiceService.getInvoice(id);
     if (invoice.isEmpty()) {
       log.error("An error occurred during deleting an invoice, invoice not found for passed id: {}", id);
@@ -165,7 +165,7 @@ public class InvoiceController {
       @ApiResponse(code = 204, message = "OK"),
       @ApiResponse(code = 500, message = "Internal server error.")})
   ResponseEntity<?> deleteAllInvoices() {
-    log.debug("Deleting all invoices");
+    log.info("Deleting all invoices");
     invoiceService.deleteAllInvoices();
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
@@ -184,7 +184,7 @@ public class InvoiceController {
       log.error(message);
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
     }
-    log.debug("Saving invoice: {}", invoice);
+    log.info("Saving invoice: {}", invoice);
     Invoice savedInvoice = invoiceService.saveInvoice(invoice);
     return ResponseEntity.status(HttpStatus.OK).body(savedInvoice);
   }

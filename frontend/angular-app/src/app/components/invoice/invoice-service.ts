@@ -21,6 +21,6 @@ export class InvoiceService extends ServiceBase {
   }
 
   public getInvoices(): Observable<Invoice[]> {
-    return this.http.get<Invoice[]>(servicePath);
+    return this.http.get<Invoice[]>(ServiceBase.apiUrl(servicePath));
   }
 }
