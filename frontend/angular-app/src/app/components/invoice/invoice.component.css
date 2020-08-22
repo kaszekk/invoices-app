@@ -1,0 +1,22 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.jumbotron {
+  border-radius: 10px ;
+}
+
+li {
+  list-style-type: none;
+}
+
+label {
+  horiz-align: left;
+}
+
+/*h1,h2,h3 {*/
+/*  vertical-align:middle;*/
+/*}*/
+
+div> ul> li> span> span> {
+  vertical-align:middle;
+  margin-top: -0.5em;
+}

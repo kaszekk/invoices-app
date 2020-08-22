@@ -1,0 +1,5 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.jumbotron {
+  border-radius: 10px ;
+}

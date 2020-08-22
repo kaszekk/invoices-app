@@ -10,6 +10,9 @@ export class CompanyComponent implements OnInit {
   @Input()
   company: Company;
 
+  @Input()
+  party: string;
+
   constructor() {
   }
 

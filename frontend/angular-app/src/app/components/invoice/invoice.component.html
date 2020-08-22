@@ -1,15 +1,46 @@
-<p>invoice works!
+<div class="jumbotron col-lg-4">
 
-<p>{{invoice.id}} invoice id</p>
-<p>{{invoice.number}} invoice number</p>
-<p>{{invoice.issuedDate | date }} invoice issuedDate</p>
-<p>{{invoice.dueDate | date}} invoice due date</p>
-<p>{{invoice.number}} invoice number</p>
+  <ul>
+    <li>
+      <span class="badge">id </span>
+      <span id="invoiceIdReadOnly"
+            class="col-lg-4 offset-1 text-right">
+        {{invoice.id}}
+      </span>
+    </li>
+
+    <li>
+      <span class="badge">invoice number </span>
+      <span id="invoiceNumberReadOnly"
+            class="col-lg-4 offset-1">
+        {{invoice.number}}
+      </span>
+    </li>
+
+    <li>
+      <span class="badge">issue date </span>
+      <span id="invoiceIssueDateReadOnly"
+            class="col-lg-4 offset-1">
+        {{invoice.issuedDate | date}}
+      </span>
+    </li>
+
+    <li>
+      <span class="badge">due date </span>
+      <span id="invoiceDueDateReadOnly"
+            class="col-lg-4 offset-1">
+        {{invoice.dueDate | date}}
+      </span>
+    </li>
+
+  </ul>
+</div>
 
 <app-seller [seller]="invoice.seller"></app-seller>
 
 <app-buyer [buyer]="invoice.buyer"></app-buyer>
 
-<div *ngFor="let entry of invoice.invoiceEntries">
+<div *ngFor="let entry of invoice.entries">
   <app-invoice-entry [invoiceEntry]="entry"></app-invoice-entry>
 </div>
+<hr>

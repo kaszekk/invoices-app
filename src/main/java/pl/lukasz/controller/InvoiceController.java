@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,7 @@ import pl.lukasz.service.InvoiceService;
 @RestController
 @AllArgsConstructor
 @Slf4j
+@RestController
 @RequestMapping("/invoices")
 @Api(value = "/invoices", description = "Available operations for invoice application", tags = {"Invoices"})
 public class InvoiceController {

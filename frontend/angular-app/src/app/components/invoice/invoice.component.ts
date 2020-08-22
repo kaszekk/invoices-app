@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Invoice} from "./invoice";
-import {MockInvoice} from "../../helpers/MockInvoice";
+import {InvoiceService} from "./invoice-service";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-invoice',
@@ -8,12 +9,24 @@ import {MockInvoice} from "../../helpers/MockInvoice";
   styleUrls: ['./invoice.component.css']
 })
 export class InvoiceComponent implements OnInit {
-  @Input() invoice: Invoice;
+  @Input()
+  invoice?: Invoice;
+  invoices: Invoice[];
+  invoiceCount: number;
+  serviceInvoice: Invoice;
 
-  constructor() {
+  constructor(private invoiceService: InvoiceService) {
   }
 
   ngOnInit(): void {
+    this.invoiceService.getInvoice(2).subscribe(invoiceResponse => {
+      this.invoice = invoiceResponse;
+    });
+
+    this.invoiceService.getInvoices().subscribe(invoices => {
+      this.invoices = invoices;
+    });
+
   }
 
 }

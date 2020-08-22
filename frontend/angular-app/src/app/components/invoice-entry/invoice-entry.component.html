@@ -1,8 +1,69 @@
-<p> {{invoiceEntry.id}} invoice entry id </p>
-<p> {{invoiceEntry.productName}} invoice product name </p>
-<p> {{invoiceEntry.quantity}} invoice quantity </p>
-<p> {{invoiceEntry.unit}} unit </p>
-<p> {{invoiceEntry.price}} price</p>
-<p> {{invoiceEntry.netValue}} nett value </p>
-<p> {{invoiceEntry.grossValue}} gross value </p>
-<p> {{invoiceEntry.vatRate}}% vat rate </p>
+<div class="jumbotron col-lg-4">
+
+  <ul>
+    <li>
+      <span class="badge">invoice entry id </span>
+      <span id="invoiceEntryIdReadOnly"
+            class="col-lg-4 offset-1">
+        {{invoiceEntry.id}}
+      </span>
+    </li>
+
+    <li>
+      <span class="badge">invoice product name </span>
+      <span id="invoiceProductNameReadOnly"
+            class="col-lg-4 offset-1">
+        {{invoiceEntry.productName}}
+      </span>
+    </li>
+
+    <li>
+      <span class="badge">invoiceEntry.quantity </span>
+      <span id="invoiceEntryQuantityReadOnly"
+            class="col-lg-4 offset-1">
+        {{invoiceEntry.quantity}}
+      </span>
+    </li>
+
+    <li>
+      <span class="badge">invoice entry unit </span>
+      <span id="invoiceEntryUnitReadOnly"
+            class="col-lg-4 offset-1">
+        {{invoiceEntry.unit}}
+      </span>
+    </li>
+
+    <li>
+      <span class="badge">invoice entry price </span>
+      <span id="invoiceEntryPriceReadOnly"
+            class="col-lg-4 offset-1">
+        {{invoiceEntry.price}}
+      </span>
+    </li>
+
+    <li>
+      <span class="badge">invoice entry netValue </span>
+      <span id="invoiceEntryNetValueReadOnly"
+            class="col-lg-4 offset-1">
+        {{invoiceEntry.netValue}}
+      </span>
+    </li>
+
+    <li>
+      <span class="badge">invoice entry gross value</span>
+      <span id="invoiceEntryGrossValueReadOnly"
+            class="col-lg-4 offset-1">
+        {{invoiceEntry.grossValue}}
+      </span>
+    </li>
+
+    <li>
+      <span class="badge">invoice entry Vat rate</span>
+      <span id="invoiceEntryVatRateReadOnly"
+            class="col-lg-4 offset-1">
+        {{invoiceEntry.vatRate}}
+      </span>
+    </li>
+
+  </ul>
+</div>

@@ -5,7 +5,7 @@ export class Invoice {
   dueDate: Date;
   seller: Company;
   buyer: Company;
-  invoiceEntries: InvoiceEntry[] = [];
+  entries: InvoiceEntry[] = [];
 }
 
 export class InvoiceEntry {
