@@ -1,5 +1,6 @@
 package pl.lukasz.service;
 
+import pl.lukasz.model.Invoice;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Optional;
@@ -8,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import pl.lukasz.model.Invoice;
 import pl.lukasz.repository.InvoiceRepository;
 
 @Service
