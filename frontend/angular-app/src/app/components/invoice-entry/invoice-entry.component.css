@@ -1,9 +1,20 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
-.jumbotron {
-  border-radius: 10px ;
+.invoice-entry-container {
+  background-color: #73653c;
+  display: inline-block;
+  padding: 30px;
+  margin: 10px;
+  border: 10px;
+  text-align: justify-all;
+  border-radius: 10px;
 }
+
+/*.jumbotron {*/
+/*  border-radius: 10px ;*/
+/*}*/
 
 li {
   list-style-type: none;
 }
+

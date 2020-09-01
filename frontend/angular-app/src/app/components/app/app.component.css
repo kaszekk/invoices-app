@@ -1,0 +1,10 @@
+.invoice-container {
+  background-color: #54541c;
+  display: inline-block;
+  width: auto;
+  padding: 30px;
+  margin-bottom:  5px;
+  text-align: justify-all;
+
+  border-radius: 10px;
+}

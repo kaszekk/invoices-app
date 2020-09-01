@@ -10,6 +10,9 @@ import {Subject} from "rxjs";
 })
 export class InvoiceComponent implements OnInit {
   @Input()
+  ind: number;
+
+  @Input()
   invoice: Invoice;
 
   ngOnInit(): void {

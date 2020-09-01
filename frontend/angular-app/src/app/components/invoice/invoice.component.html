@@ -1,39 +1,36 @@
-<div class="jumbotron col-lg-4">
-
+<div class="container">
   <ul>
-
+    <li>
+       # {{ind + 1}}
+    </li>
     <li>
       <span class="badge">invoice number </span>
-      <span id="invoiceNumberReadOnly"
-            class="col-lg-4 offset-1">
+      <span id="invoiceNumberReadOnly">
         {{invoice.number}}
       </span>
     </li>
 
     <li>
       <span class="badge">issue date </span>
-      <span id="invoiceIssueDateReadOnly"
-            class="col-lg-4 offset-1">
+      <span id="invoiceIssueDateReadOnly">
         {{invoice.issuedDate | date}}
       </span>
     </li>
 
     <li>
       <span class="badge">due date </span>
-      <span id="invoiceDueDateReadOnly"
-            class="col-lg-4 offset-1">
+      <span id="invoiceDueDateReadOnly">
         {{invoice.dueDate | date}}
       </span>
     </li>
 
   </ul>
+
+  <app-seller [seller]="invoice.seller"></app-seller>
+
+  <app-buyer [buyer]="invoice.buyer"></app-buyer>
+
+  <div *ngFor="let entry of invoice.entries">
+    <app-invoice-entry [invoiceEntry]="entry"></app-invoice-entry>
+  </div>
 </div>
-
-<app-seller [seller]="invoice.seller"></app-seller>
-
-<app-buyer [buyer]="invoice.buyer"></app-buyer>
-
-<div *ngFor="let entry of invoice.entries">
-  <app-invoice-entry [invoiceEntry]="entry"></app-invoice-entry>
-</div>
-<hr>

@@ -1,5 +1,11 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
-.jumbotron {
-  border-radius: 10px ;
+.seller-container {
+  background-color: red;
+  display: inline-block;
+  padding: 30px;
+  margin: 10px;
+  border: 10px;
+  text-align: justify-all;
+  border-radius: 10px;
 }

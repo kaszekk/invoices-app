@@ -1,9 +1,13 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
-.jumbotron {
-  border-radius: 10px ;
-}
-
 li {
   list-style-type: none;
 }
+
+span .badge {
+  color: black;
+}
+
+/*li :nth-child(2) {*/
+/*  text-align: right;*/
+/*}*/
