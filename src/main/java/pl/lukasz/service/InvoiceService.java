@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 import pl.lukasz.model.Invoice;
 import pl.lukasz.repository.InvoiceRepository;
 
+@Service
 @Slf4j
 @AllArgsConstructor
-@Service
 public class InvoiceService {
 
   public static final String FROM_DATE_CANNOT_BE_AFTER_TO_DATE = "fromDate cannot be after toDate.";
