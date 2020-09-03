@@ -4,9 +4,9 @@ The application is intended for invoicing. At backend Spring Boot is used, where
 The app is still in early stage, and it is being developed in my spare time.
 
 # Installation
-Use JDK, version 1.13 or higher
-Open application with your IDE, I recommend You to use Gradle project in IntelliJ IDEA
-Run gradlew build to assure that application works properly
+* Use JDK, version 1.13 or higher
+* Open application with your IDE, I recommend You to use Gradle project in IntelliJ IDEA
+* Run gradlew build to assure that application works properly
 # Database
 Supported databases:
 PostgreSQL
