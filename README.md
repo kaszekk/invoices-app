@@ -15,11 +15,11 @@ PostgreSQL
 Run the application and open your browser at a specified URL: http://localhost:8080/swagger-ui.html
 
 # Technology Stack
-Java SE 13
-Gradle - Dependency Management, Build
-Hibernate - mapping an object-oriented domain model to a relational database
-Spring boot
-Spring Data
-JUnit
-Logger
-Swagger
+* Java SE 13
+* Gradle - Dependency Management, Build
+* Hibernate - mapping an object-oriented domain model to a relational database
+* Spring boot
+* Spring Data
+* JUnit
+* Logger
+* Swagger
