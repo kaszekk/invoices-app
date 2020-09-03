@@ -8,8 +8,7 @@ The app is still in early stage, and it is being developed in my spare time.
 * Open application with your IDE, I recommend You to use Gradle project in IntelliJ IDEA
 * Run gradlew build to assure that application works properly
 # Database
-Supported databases:
-PostgreSQL
+* PostgreSQL
 
 # Swagger UI
 Run the application and open your browser at a specified URL: http://localhost:8080/swagger-ui.html
