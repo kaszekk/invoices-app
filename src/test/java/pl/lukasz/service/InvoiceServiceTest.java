@@ -78,7 +78,7 @@ class InvoiceServiceTest {
   @Test
   void shouldThrowExceptionForNullIdWhileGettingInvoicesByBuyer() {
     final Throwable exception = assertThrows(NullPointerException.class, () -> invoiceService.getAllInvoicesByBuyer(null));
-    assertEquals("id" + IS_MARKED_NON_NULL_BUT_IS_NULL, exception.getMessage());
+    assertEquals("ids" + IS_MARKED_NON_NULL_BUT_IS_NULL, exception.getMessage());
   }
 
   @Test
