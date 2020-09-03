@@ -55,7 +55,7 @@ class InvoiceControllerTest {
 
     //When
     MvcResult result = mockMvc.perform(
-        get("/invoices/{id}", invoiceId).accept(MediaType.APPLICATION_JSON_UTF8))
+        get("/invoices/{id}", invoiceId).accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
     Invoice actualInvoice = mapper.readValue(result.getResponse().getContentAsString(), Invoice.class);
@@ -74,7 +74,7 @@ class InvoiceControllerTest {
 
     //When
     MvcResult result = mockMvc.perform(
-        get("/invoices/{id}", invoiceId).accept(MediaType.APPLICATION_JSON_UTF8))
+        get("/invoices/{id}", invoiceId).accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
 
@@ -93,10 +93,10 @@ class InvoiceControllerTest {
 
     //When
     MvcResult result = mockMvc.perform(
-        get("/invoices").accept(MediaType.APPLICATION_JSON_UTF8))
+        get("/invoices").accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
-    List<Invoice> actualInvoices = mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<List<Invoice>>() {
+    List<Invoice> actualInvoices = mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<>() {
     });
 
     //Then
@@ -121,7 +121,7 @@ class InvoiceControllerTest {
         get("/invoices/byDate")
             .param("fromDate", fromDate)
             .param("toDate", toDate)
-            .accept(MediaType.APPLICATION_JSON_UTF8))
+            .accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
     List<Invoice> actualInvoices = mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<List<Invoice>>() {
@@ -144,7 +144,7 @@ class InvoiceControllerTest {
         get("/invoices/byDate")
             .param("fromDate", fromDate)
             .param("toDate", toDate)
-            .accept(MediaType.APPLICATION_JSON_UTF8))
+            .accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
 
@@ -164,7 +164,7 @@ class InvoiceControllerTest {
         get("/invoices/byDate")
             .param("fromDate", "")
             .param("toDate", toDate)
-            .accept(MediaType.APPLICATION_JSON_UTF8))
+            .accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
 
@@ -184,7 +184,7 @@ class InvoiceControllerTest {
         get("/invoices/byDate")
             .param("fromDate", fromDate)
             .param("toDate", "")
-            .accept(MediaType.APPLICATION_JSON_UTF8))
+            .accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
 
@@ -205,7 +205,7 @@ class InvoiceControllerTest {
     MvcResult result = mockMvc.perform(
         get("/invoices/byBuyer")
             .param("id", "1")
-            .accept(MediaType.APPLICATION_JSON_UTF8))
+            .accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
     List<Invoice> actualInvoices = mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<List<Invoice>>() {
@@ -223,7 +223,7 @@ class InvoiceControllerTest {
     MvcResult result = mockMvc.perform(
         get("/invoices/byBuyer")
             .param("id", "")
-            .accept(MediaType.APPLICATION_JSON_UTF8))
+            .accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
 
@@ -244,7 +244,7 @@ class InvoiceControllerTest {
     MvcResult result = mockMvc.perform(
         get("/invoices/bySeller")
             .param("id", "1")
-            .accept(MediaType.APPLICATION_JSON_UTF8))
+            .accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
     List<Invoice> actualInvoices = mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<List<Invoice>>() {
@@ -262,7 +262,7 @@ class InvoiceControllerTest {
     MvcResult result = mockMvc.perform(
         get("/invoices/bySeller")
             .param("id", "")
-            .accept(MediaType.APPLICATION_JSON_UTF8))
+            .accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
 
@@ -279,7 +279,7 @@ class InvoiceControllerTest {
 
     //When
     MvcResult result = mockMvc.perform(
-        delete("/invoices/{id}", 1L).accept(MediaType.APPLICATION_JSON_UTF8))
+        delete("/invoices/{id}", 1L).accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
     Invoice actualInvoice = mapper.readValue(result.getResponse().getContentAsString(), Invoice.class);
@@ -298,7 +298,7 @@ class InvoiceControllerTest {
 
     //When
     MvcResult result = mockMvc.perform(
-        delete("/invoices/{id}", id).accept(MediaType.APPLICATION_JSON_UTF8))
+        delete("/invoices/{id}", id).accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
 
@@ -312,7 +312,7 @@ class InvoiceControllerTest {
   void shouldDeleteAllInvoices() throws Exception {
     //When
     MvcResult result = mockMvc.perform(
-        delete("/invoices").accept(MediaType.APPLICATION_JSON_UTF8))
+        delete("/invoices").accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
 
@@ -331,8 +331,8 @@ class InvoiceControllerTest {
     //When
     MvcResult result = mockMvc.perform(
         post("/invoices")
-            .contentType(MediaType.APPLICATION_JSON_UTF8)
-            .accept(MediaType.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .accept(MediaType.APPLICATION_JSON_VALUE)
             .content(invoiceAsJson))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
@@ -353,8 +353,8 @@ class InvoiceControllerTest {
     //When
     MvcResult result = mockMvc.perform(
         post("/invoices")
-            .contentType(MediaType.APPLICATION_JSON_UTF8)
-            .accept(MediaType.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .accept(MediaType.APPLICATION_JSON_VALUE)
             .content(invoiceAsJson))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();

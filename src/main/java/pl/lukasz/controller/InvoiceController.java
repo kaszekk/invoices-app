@@ -27,9 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.lukasz.model.Invoice;
 import pl.lukasz.service.InvoiceService;
 
+@RestController
 @AllArgsConstructor
 @Slf4j
-@RestController
 @RequestMapping("/invoices")
 @Api(value = "/invoices", description = "Available operations for invoice application", tags = {"Invoices"})
 public class InvoiceController {
