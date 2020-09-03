@@ -22,3 +22,4 @@ Run the application and open your browser at a specified URL: http://localhost:8
 * JUnit
 * Logger
 * Swagger
+* Project Lombok
