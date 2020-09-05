@@ -7,12 +7,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Value;
 
-@Data
 @AllArgsConstructor
+@Value
 @Entity
 @ApiModel(value = "Company")
+@SuppressWarnings("PMD.NullAssignment")
 public final class Company {
 
   @Id
@@ -38,4 +39,13 @@ public final class Company {
   @ApiModelProperty(value = "Email address", example = "jsmith@mail.com")
   private final String email;
 
+  Company() {
+    this.id = null;
+    this.name = null;
+    this.address = null;
+    this.taxId = null;
+    this.accountNumber = null;
+    this.phoneNumber = null;
+    this.email = null;
+  }
 }

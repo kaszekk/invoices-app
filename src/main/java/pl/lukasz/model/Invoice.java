@@ -12,14 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.Value;
 
 @AllArgsConstructor
-@Getter
-@EqualsAndHashCode
+@Value
 @ApiModel(value = "Invoice")
 @Entity
+@SuppressWarnings("PMD.NullAssignment")
 public final class Invoice {
 
   @Id
@@ -45,4 +44,13 @@ public final class Invoice {
   @ManyToMany(cascade = CascadeType.ALL)
   private final List<InvoiceEntry> entries;
 
+  Invoice() {
+    this.id = null;
+    this.number = null;
+    this.issuedDate = null;
+    this.dueDate = null;
+    this.seller = null;
+    this.buyer = null;
+    this.entries = null;
+  }
 }
