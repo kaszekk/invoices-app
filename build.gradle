@@ -22,6 +22,7 @@ plugins {
     // core
     id 'checkstyle'
     id 'java'
+    id 'pmd'
 }
 
 version '1.0'
@@ -65,11 +66,21 @@ dependencies {
 
 checkstyle {
     configFile file('config/checkstyle.xml')
-    toolVersion '8.32'
+    toolVersion '8.36'
     showViolations = true
     ignoreFailures = false
     maxWarnings = 0
     maxErrors = 0
+}
+
+pmdMain {
+    ruleSetFiles = files("config/main-pmd-ruleset.xml")
+    ruleSets = []
+}
+
+pmdTest {
+    ruleSetFiles = files("config/test-pmd-ruleset.xml")
+    ruleSets = []
 }
 
 tasks.withType(JavaCompile) {
