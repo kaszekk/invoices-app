@@ -23,6 +23,7 @@ import pl.lukasz.model.Invoice;
 public interface InvoiceControllerApi {
 
   String CONTAINER_LIST = "List";
+  String INTERNAL_SERVER_ERROR = "Internal server error.";
 
   @GetMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
@@ -31,7 +32,7 @@ public interface InvoiceControllerApi {
   @ApiResponses({
       @ApiResponse(code = 200, message = "OK"),
       @ApiResponse(code = 404, message = "Invoice not found for passed id."),
-      @ApiResponse(code = 500, message = "Internal server error.")})
+      @ApiResponse(code = 500, message = INTERNAL_SERVER_ERROR)})
   ResponseEntity<?> getInvoiceById(@PathVariable Long id);
 
   @GetMapping()
@@ -39,7 +40,7 @@ public interface InvoiceControllerApi {
   @ApiOperation(value = "Get all invoices", response = Invoice.class, responseContainer = CONTAINER_LIST)
   @ApiResponses({
       @ApiResponse(code = 200, message = "OK"),
-      @ApiResponse(code = 500, message = "Internal server error.")})
+      @ApiResponse(code = 500, message = INTERNAL_SERVER_ERROR)})
   ResponseEntity<?> getAllInvoices();
 
   @GetMapping("/byDate")
@@ -52,7 +53,7 @@ public interface InvoiceControllerApi {
   @ApiResponses({
       @ApiResponse(code = 200, message = "OK"),
       @ApiResponse(code = 400, message = "Passed dates are invalid."),
-      @ApiResponse(code = 500, message = "Internal server error.")})
+      @ApiResponse(code = 500, message = INTERNAL_SERVER_ERROR)})
   ResponseEntity<?> getInvoicesByDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fromDate,
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate toDate);
 
@@ -64,7 +65,7 @@ public interface InvoiceControllerApi {
   @ApiResponses({
       @ApiResponse(code = 200, message = "OK"),
       @ApiResponse(code = 400, message = "Passed buyer id is invalid."),
-      @ApiResponse(code = 500, message = "Internal server error.")})
+      @ApiResponse(code = 500, message = INTERNAL_SERVER_ERROR)})
   ResponseEntity<?> getInvoicesByBuyer(@RequestParam Long id);
 
   @GetMapping("/bySeller")
@@ -75,7 +76,7 @@ public interface InvoiceControllerApi {
   @ApiResponses({
       @ApiResponse(code = 200, message = "OK"),
       @ApiResponse(code = 400, message = "Passed seller id is invalid."),
-      @ApiResponse(code = 500, message = "Internal server error.")})
+      @ApiResponse(code = 500, message = INTERNAL_SERVER_ERROR)})
   ResponseEntity<?> getInvoicesBySeller(@RequestParam Long id);
 
   @DeleteMapping("/{id}")
@@ -85,7 +86,7 @@ public interface InvoiceControllerApi {
   @ApiResponses({
       @ApiResponse(code = 200, message = "OK"),
       @ApiResponse(code = 404, message = "Invoice not found for passed id."),
-      @ApiResponse(code = 500, message = "Internal server error.")})
+      @ApiResponse(code = 500, message = INTERNAL_SERVER_ERROR)})
   ResponseEntity<?> deleteInvoice(@PathVariable Long id);
 
   @DeleteMapping
@@ -93,7 +94,7 @@ public interface InvoiceControllerApi {
   @ApiOperation(value = "Delete ALL invoices", notes = "WARNING!!! This operation deletes ALL available invoices from database.")
   @ApiResponses({
       @ApiResponse(code = 204, message = "OK"),
-      @ApiResponse(code = 500, message = "Internal server error.")})
+      @ApiResponse(code = 500, message = INTERNAL_SERVER_ERROR)})
   ResponseEntity<?> deleteAllInvoices();
 
   @PostMapping
@@ -103,6 +104,6 @@ public interface InvoiceControllerApi {
   @ApiResponses({
       @ApiResponse(code = 200, message = "OK"),
       @ApiResponse(code = 400, message = "Passed invoice is invalid."),
-      @ApiResponse(code = 500, message = "Internal server error.")})
+      @ApiResponse(code = 500, message = INTERNAL_SERVER_ERROR)})
   ResponseEntity<?> saveInvoice(@RequestBody(required = false) Invoice invoice);
 }
