@@ -44,14 +44,4 @@ public class InvoiceEntry {
   @ApiModelProperty(value = "VAT rate to be applied to net value ie. 0.23 means 23% VAT", example = "RATE_23")
   private final Vat vatRate;
 
-  private InvoiceEntry() {
-    this.id = null;
-    this.productName = null;
-    this.quantity = 0;
-    this.unit = null;
-    this.price = null;
-    this.netValue = null;
-    this.grossValue = null;
-    this.vatRate = null;
-  }
 }

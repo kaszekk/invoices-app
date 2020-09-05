@@ -13,7 +13,7 @@ import lombok.Data;
 @AllArgsConstructor
 @Entity
 @ApiModel(value = "Company")
-public class Company {
+public final class Company {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,13 +38,4 @@ public class Company {
   @ApiModelProperty(value = "Email address", example = "jsmith@mail.com")
   private final String email;
 
-  private Company() {
-    this.id = null;
-    this.name = null;
-    this.address = null;
-    this.taxId = null;
-    this.accountNumber = null;
-    this.phoneNumber = null;
-    this.email = null;
-  }
 }

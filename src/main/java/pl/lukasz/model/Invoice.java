@@ -20,7 +20,7 @@ import lombok.Getter;
 @EqualsAndHashCode
 @ApiModel(value = "Invoice")
 @Entity
-public class Invoice {
+public final class Invoice {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,13 +45,4 @@ public class Invoice {
   @ManyToMany(cascade = CascadeType.ALL)
   private final List<InvoiceEntry> entries;
 
-  private Invoice() {
-    this.id = null;
-    this.number = null;
-    this.issuedDate = null;
-    this.dueDate = null;
-    this.seller = null;
-    this.buyer = null;
-    this.entries = null;
-  }
 }
