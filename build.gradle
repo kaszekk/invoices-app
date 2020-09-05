@@ -20,6 +20,7 @@ plugins {
     id 'org.springframework.boot' version '2.2.6.RELEASE'
 
     // core
+    id 'checkstyle'
     id 'java'
 }
 
@@ -60,6 +61,15 @@ dependencies {
     testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
     compileOnly("org.projectlombok:lombok:${lombokVersion}")
     testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
+}
+
+checkstyle {
+    configFile file('config/checkstyle.xml')
+    toolVersion '8.32'
+    showViolations = true
+    ignoreFailures = false
+    maxWarnings = 0
+    maxErrors = 0
 }
 
 tasks.withType(JavaCompile) {

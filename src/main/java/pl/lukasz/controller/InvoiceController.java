@@ -69,7 +69,8 @@ public class InvoiceController {
 
   @GetMapping("/byDate")
   @ResponseStatus(HttpStatus.OK)
-  @ApiOperation(value = "Get all invoices by dates", notes = "Gets all invoices issued between specified dates (inclusive) fromDate and toDate.", response = Invoice.class, responseContainer = "List")
+  @ApiOperation(value = "Get all invoices by dates", notes = "Gets all invoices issued between specified dates (inclusive) fromDate and toDate.",
+      response = Invoice.class, responseContainer = "List")
   @ApiImplicitParams({
       @ApiImplicitParam(name = "fromDate", value = "YYYY-MM-DD", example = "2020-03-23", dataType = "date"),
       @ApiImplicitParam(name = "toDate", value = "YYYY-MM-DD", example = "2020-05-04", dataType = "date")})
@@ -170,7 +171,8 @@ public class InvoiceController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.OK)
-  @ApiOperation(value = "When invoice id field is not set application saves the invoice to database as new invoice, otherwise updates existing invoice.", response = Invoice.class)
+  @ApiOperation(value = "When invoice id field is not set application saves the invoice to database as new invoice,"
+      + " otherwise updates existing invoice.", response = Invoice.class)
   @ApiResponses({
       @ApiResponse(code = 200, message = "OK"),
       @ApiResponse(code = 400, message = "Passed invoice is invalid."),

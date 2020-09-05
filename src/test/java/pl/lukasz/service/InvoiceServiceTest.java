@@ -48,29 +48,29 @@ class InvoiceServiceTest {
 
   @Test
   void shouldReturnAllInvoices() {
-    //Given
+    // Given
     List<Invoice> expectedInvoiceList = List.of(invoice1, invoice2);
     when(invoiceRepository.findAll()).thenReturn(expectedInvoiceList);
 
-    //When
+    // When
     Collection<Invoice> resultInvoiceList = invoiceService.getAllInvoices();
 
-    //Then
+    // Then
     assertEquals(expectedInvoiceList, resultInvoiceList);
     verify(invoiceRepository).findAll();
   }
 
   @Test
   void shouldReturnAllInvoicesForGivenBuyer() {
-    //Given
+    // Given
     List<Invoice> invoiceList = List.of(invoice1, invoice2, invoice1);
     List<Invoice> expectedInvoiceList = List.of(invoice1, invoice1);
     when(invoiceRepository.findAll()).thenReturn(invoiceList);
 
-    //When
+    // When
     Collection<Invoice> resultInvoiceList = invoiceService.getAllInvoicesByBuyer(invoice1.getBuyer().getId());
 
-    //Then
+    // Then
     assertEquals(expectedInvoiceList, resultInvoiceList);
     verify(invoiceRepository).findAll();
   }
@@ -83,15 +83,15 @@ class InvoiceServiceTest {
 
   @Test
   void shouldReturnAllInvoicesForGivenSeller() {
-    //Given
+    // Given
     List<Invoice> invoiceList = List.of(invoice1, invoice2, invoice1);
     List<Invoice> expectedInvoiceList = List.of(invoice1, invoice1);
     when(invoiceRepository.findAll()).thenReturn(invoiceList);
 
-    //When
+    // When
     Collection<Invoice> resultInvoiceList = invoiceService.getAllInvoicesBySeller(invoice1.getSeller().getId());
 
-    //Then
+    // Then
     assertEquals(expectedInvoiceList, resultInvoiceList);
     verify(invoiceRepository).findAll();
   }
@@ -104,7 +104,7 @@ class InvoiceServiceTest {
 
   @Test
   void shouldReturnAllInvoicesFromGivenDateRage() {
-    //Given
+    // Given
     Invoice invoice3 = new Invoice(invoice1.getId(), invoice1.getNumber(), LocalDate.of(2016, 9, 13), invoice1.getDueDate(), invoice1.getSeller(),
         invoice1.getBuyer(), invoice1.getEntries());
     Invoice invoice4 = new Invoice(invoice2.getId(), invoice2.getNumber(), LocalDate.of(2017, 5, 23), invoice2.getDueDate(), invoice2.getSeller(),
@@ -114,10 +114,10 @@ class InvoiceServiceTest {
 
     when(invoiceRepository.findAll()).thenReturn(invoiceList);
 
-    //When
+    // When
     Collection<Invoice> resultInvoiceList = invoiceService.getAllInvoicesByDate(LocalDate.of(2016, 1, 1), LocalDate.of(2016, 12, 31));
 
-    //Then
+    // Then
     assertEquals(expectedInvoiceList, resultInvoiceList);
     verify(invoiceRepository).findAll();
   }
@@ -145,13 +145,13 @@ class InvoiceServiceTest {
 
   @Test
   void shouldReturnInvoice() {
-    //Given
+    // Given
     when(invoiceRepository.findById(1L)).thenReturn(Optional.ofNullable(invoice1));
 
-    //When
+    // When
     Optional<Invoice> resultInvoice = invoiceService.getInvoice(1L);
 
-    //Then
+    // Then
     assertTrue(resultInvoice.isPresent());
     assertEquals(invoice1, resultInvoice.get());
   }
@@ -164,13 +164,13 @@ class InvoiceServiceTest {
 
   @Test
   void shouldSaveInvoice() {
-    //Given
+    // Given
     when(invoiceRepository.save(invoice1)).thenReturn(invoice2);
 
-    //When
+    // When
     Invoice resultInvoice = invoiceService.saveInvoice(invoice1);
 
-    //Then
+    // Then
     assertEquals(invoice2, resultInvoice);
     verify(invoiceRepository).save(invoice1);
   }
@@ -183,10 +183,10 @@ class InvoiceServiceTest {
 
   @Test
   void shouldDeleteInvoice() {
-    //When
+    // When
     invoiceService.deleteInvoice(1L);
 
-    //Then
+    // Then
     verify(invoiceRepository).deleteById(1L);
   }
 
