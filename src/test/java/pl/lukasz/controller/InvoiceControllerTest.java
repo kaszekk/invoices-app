@@ -48,19 +48,19 @@ class InvoiceControllerTest {
 
   @Test
   void shouldReturnInvoice() throws Exception {
-    //Given
+    // Given
     Invoice invoice = InvoiceGenerator.getRandomInvoice();
     Long invoiceId = 1L;
     when(invoiceService.getInvoice(invoiceId)).thenReturn(Optional.ofNullable(invoice));
 
-    //When
+    // When
     MvcResult result = mockMvc.perform(
         get("/invoices/{id}", invoiceId).accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
     Invoice actualInvoice = mapper.readValue(result.getResponse().getContentAsString(), Invoice.class);
 
-    //Then
+    // Then
     assertEquals(HttpStatus.OK.value(), actualHttpStatus);
     assertEquals(invoice, actualInvoice);
     verify(invoiceService).getInvoice(invoiceId);
@@ -68,30 +68,30 @@ class InvoiceControllerTest {
 
   @Test
   void shouldReturnNotFoundDuringGettingInvoiceWhenInvoiceDoesNotExist() throws Exception {
-    //Given
+    // Given
     Long invoiceId = 10L;
     when(invoiceService.getInvoice(invoiceId)).thenReturn(Optional.empty());
 
-    //When
+    // When
     MvcResult result = mockMvc.perform(
         get("/invoices/{id}", invoiceId).accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
 
-    //Then
+    // Then
     assertEquals(HttpStatus.NOT_FOUND.value(), actualHttpStatus);
     verify(invoiceService).getInvoice(invoiceId);
   }
 
   @Test
   void shouldReturnAllInvoices() throws Exception {
-    //Given
+    // Given
     Invoice invoice1 = InvoiceGenerator.getRandomInvoice();
     Invoice invoice2 = InvoiceGenerator.getRandomInvoice();
     Collection<Invoice> invoices = Arrays.asList(invoice1, invoice2);
     when(invoiceService.getAllInvoices()).thenReturn(invoices);
 
-    //When
+    // When
     MvcResult result = mockMvc.perform(
         get("/invoices").accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
@@ -99,7 +99,7 @@ class InvoiceControllerTest {
     List<Invoice> actualInvoices = mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<>() {
     });
 
-    //Then
+    // Then
     assertEquals(HttpStatus.OK.value(), actualHttpStatus);
     assertEquals(invoices, actualInvoices);
     verify(invoiceService).getAllInvoices();
@@ -107,7 +107,7 @@ class InvoiceControllerTest {
 
   @Test
   void shouldReturnAllInvoicesIssuedWithinGivenDates() throws Exception {
-    //Given
+    // Given
     String fromDate = "2018-01-01";
     String toDate = "2018-01-31";
     Invoice invoice1 = InvoiceGenerator.getRandomInvoiceWithSpecificIssueDate(LocalDate.parse(fromDate));
@@ -116,7 +116,7 @@ class InvoiceControllerTest {
     List<Invoice> expected = Arrays.asList(invoice1, invoice2, invoice3);
     when(invoiceService.getAllInvoicesByDate(LocalDate.parse(fromDate), LocalDate.parse(toDate))).thenReturn(expected);
 
-    //When
+    // When
     MvcResult result = mockMvc.perform(
         get("/invoices/byDate")
             .param("fromDate", fromDate)
@@ -127,7 +127,7 @@ class InvoiceControllerTest {
     List<Invoice> actualInvoices = mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<List<Invoice>>() {
     });
 
-    //Then
+    // Then
     assertEquals(HttpStatus.OK.value(), actualHttpStatus);
     assertEquals(expected, actualInvoices);
     verify(invoiceService).getAllInvoicesByDate(LocalDate.parse(fromDate), LocalDate.parse(toDate));
@@ -135,11 +135,11 @@ class InvoiceControllerTest {
 
   @Test
   void shouldReturnBadRequestDuringGettingAllInvoicesFromGivenDateRangeWhenFromDateIsAfterToDate() throws Exception {
-    //Given
+    // Given
     String fromDate = "2018-01-10";
     String toDate = "2018-01-09";
 
-    //When
+    // When
     MvcResult result = mockMvc.perform(
         get("/invoices/byDate")
             .param("fromDate", fromDate)
@@ -148,18 +148,18 @@ class InvoiceControllerTest {
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
 
-    //Then
+    // Then
     assertEquals(HttpStatus.BAD_REQUEST.value(), actualHttpStatus);
     verify(invoiceService, never()).getAllInvoicesByDate(LocalDate.parse(fromDate), LocalDate.parse(toDate));
   }
 
   @Test
   void shouldReturnBadRequestWhenFromDateArgumentIsNullDuringGettingAllInvoicesByDate() throws Exception {
-    //Given
+    // Given
     String fromDate = "2018-01-01";
     String toDate = "2018-01-31";
 
-    //When
+    // When
     MvcResult result = mockMvc.perform(
         get("/invoices/byDate")
             .param("fromDate", "")
@@ -168,18 +168,18 @@ class InvoiceControllerTest {
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
 
-    //Then
+    // Then
     assertEquals(HttpStatus.BAD_REQUEST.value(), actualHttpStatus);
     verify(invoiceService, never()).getAllInvoicesByDate(LocalDate.parse(fromDate), LocalDate.parse(toDate));
   }
 
   @Test
   void shouldReturnBadRequestWhenToDateArgumentIsNullDuringGettingAllInvoicesByDate() throws Exception {
-    //Given
+    // Given
     String fromDate = "2018-01-01";
     String toDate = "2018-01-31";
 
-    //When
+    // When
     MvcResult result = mockMvc.perform(
         get("/invoices/byDate")
             .param("fromDate", fromDate)
@@ -188,20 +188,20 @@ class InvoiceControllerTest {
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
 
-    //Then
+    // Then
     assertEquals(HttpStatus.BAD_REQUEST.value(), actualHttpStatus);
     verify(invoiceService, never()).getAllInvoicesByDate(LocalDate.parse(fromDate), LocalDate.parse(toDate));
   }
 
   @Test
   void shouldReturnInvoicesByBuyerId() throws Exception {
-    //Given
+    // Given
     Invoice invoice1 = InvoiceGenerator.getRandomInvoiceWithSpecificBuyerId(1L);
     Invoice invoice2 = InvoiceGenerator.getRandomInvoiceWithSpecificBuyerId(1L);
     List<Invoice> expected = Arrays.asList(invoice1, invoice2);
     when(invoiceService.getAllInvoicesByBuyer(1L)).thenReturn(expected);
 
-    //When
+    // When
     MvcResult result = mockMvc.perform(
         get("/invoices/byBuyer")
             .param("id", "1")
@@ -211,7 +211,7 @@ class InvoiceControllerTest {
     List<Invoice> actualInvoices = mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<List<Invoice>>() {
     });
 
-    //Then
+    // Then
     assertEquals(HttpStatus.OK.value(), actualHttpStatus);
     assertEquals(expected, actualInvoices);
     verify(invoiceService).getAllInvoicesByBuyer(1L);
@@ -219,7 +219,7 @@ class InvoiceControllerTest {
 
   @Test
   void shouldReturnBadRequestWhenIdArgumentIsNullDuringGettingInvoicesByBuyerId() throws Exception {
-    //When
+    // When
     MvcResult result = mockMvc.perform(
         get("/invoices/byBuyer")
             .param("id", "")
@@ -227,20 +227,20 @@ class InvoiceControllerTest {
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
 
-    //Then
+    // Then
     assertEquals(HttpStatus.BAD_REQUEST.value(), actualHttpStatus);
     verify(invoiceService, never()).getAllInvoicesByBuyer(null);
   }
 
   @Test
   void shouldReturnInvoicesBySellerId() throws Exception {
-    //Given
+    // Given
     Invoice invoice1 = InvoiceGenerator.getRandomInvoiceWithSpecificSellerId(1L);
     Invoice invoice2 = InvoiceGenerator.getRandomInvoiceWithSpecificSellerId(1L);
     List<Invoice> expected = Arrays.asList(invoice1, invoice2);
     when(invoiceService.getAllInvoicesBySeller(1L)).thenReturn(expected);
 
-    //When
+    // When
     MvcResult result = mockMvc.perform(
         get("/invoices/bySeller")
             .param("id", "1")
@@ -250,7 +250,7 @@ class InvoiceControllerTest {
     List<Invoice> actualInvoices = mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<List<Invoice>>() {
     });
 
-    //Then
+    // Then
     assertEquals(HttpStatus.OK.value(), actualHttpStatus);
     assertEquals(expected, actualInvoices);
     verify(invoiceService).getAllInvoicesBySeller(1L);
@@ -258,7 +258,7 @@ class InvoiceControllerTest {
 
   @Test
   void shouldReturnBadRequestWhenIdArgumentIsNullDuringGettingAllInvoicesBySellerId() throws Exception {
-    //When
+    // When
     MvcResult result = mockMvc.perform(
         get("/invoices/bySeller")
             .param("id", "")
@@ -266,25 +266,25 @@ class InvoiceControllerTest {
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
 
-    //Then
+    // Then
     assertEquals(HttpStatus.BAD_REQUEST.value(), actualHttpStatus);
     verify(invoiceService, never()).getAllInvoicesBySeller(null);
   }
 
   @Test
   void shouldDeleteInvoice() throws Exception {
-    //Given
+    // Given
     Invoice invoice = InvoiceGenerator.getRandomInvoice();
     when(invoiceService.getInvoice(1L)).thenReturn(Optional.ofNullable(invoice));
 
-    //When
+    // When
     MvcResult result = mockMvc.perform(
         delete("/invoices/{id}", 1L).accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
     Invoice actualInvoice = mapper.readValue(result.getResponse().getContentAsString(), Invoice.class);
 
-    //Then
+    // Then
     assertEquals(HttpStatus.OK.value(), actualHttpStatus);
     assertEquals(invoice, actualInvoice);
     verify(invoiceService).deleteInvoice(1L);
@@ -292,17 +292,17 @@ class InvoiceControllerTest {
 
   @Test
   void shouldReturnNotFoundDuringDeletingInvoiceThatDoesNotExist() throws Exception {
-    //Given
+    // Given
     Long id = 10L;
     when(invoiceService.getInvoice(id)).thenReturn(Optional.empty());
 
-    //When
+    // When
     MvcResult result = mockMvc.perform(
         delete("/invoices/{id}", id).accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
 
-    //Then
+    // Then
     assertEquals(HttpStatus.NOT_FOUND.value(), actualHttpStatus);
     verify(invoiceService).getInvoice(id);
     verify(invoiceService, never()).deleteInvoice(id);
@@ -310,25 +310,25 @@ class InvoiceControllerTest {
 
   @Test
   void shouldDeleteAllInvoices() throws Exception {
-    //When
+    // When
     MvcResult result = mockMvc.perform(
         delete("/invoices").accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
 
-    //Then
+    // Then
     assertEquals(HttpStatus.NO_CONTENT.value(), actualHttpStatus);
     verify(invoiceService).deleteAllInvoices();
   }
 
   @Test
   void shouldSaveInvoice() throws Exception {
-    //Given
+    // Given
     Invoice invoice = InvoiceGenerator.getRandomInvoice();
     when(invoiceService.saveInvoice(invoice)).thenReturn(invoice);
     String invoiceAsJson = mapper.writeValueAsString(invoice);
 
-    //When
+    // When
     MvcResult result = mockMvc.perform(
         post("/invoices")
             .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -338,7 +338,7 @@ class InvoiceControllerTest {
     int actualHttpStatus = result.getResponse().getStatus();
     Invoice actualInvoice = mapper.readValue(result.getResponse().getContentAsString(), Invoice.class);
 
-    //Then
+    // Then
     assertEquals(HttpStatus.OK.value(), actualHttpStatus);
     assertEquals(invoice, actualInvoice);
     verify(invoiceService).saveInvoice(invoice);
@@ -346,11 +346,11 @@ class InvoiceControllerTest {
 
   @Test
   void shouldReturnBadRequestDuringSavingNullInvoice() throws Exception {
-    //Given
+    // Given
     Invoice invoice = null;
     String invoiceAsJson = mapper.writeValueAsString(invoice);
 
-    //When
+    // When
     MvcResult result = mockMvc.perform(
         post("/invoices")
             .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -359,7 +359,7 @@ class InvoiceControllerTest {
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
 
-    //Then
+    // Then
     assertEquals(HttpStatus.BAD_REQUEST.value(), actualHttpStatus);
     verify(invoiceService, never()).saveInvoice(invoice);
   }

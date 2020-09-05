@@ -36,7 +36,7 @@ public class InvoiceService {
     // TODO: 20/08/2020 try to build jpa query to get result straight from database
     return invoiceRepository.findAll()
         .stream()
-        .filter(invoice -> (invoice.getIssuedDate().compareTo(fromDate) >= 0 && invoice.getIssuedDate().compareTo(toDate) <= 0))
+        .filter(invoice -> invoice.getIssuedDate().compareTo(fromDate) >= 0 && invoice.getIssuedDate().compareTo(toDate) <= 0)
         .collect(Collectors.toList());
   }
 
@@ -44,7 +44,7 @@ public class InvoiceService {
     log.debug("Getting all invoices by buyer: {}", id);
     return invoiceRepository.findAll()
         .stream()
-        .filter(invoice -> (invoice.getBuyer().getId().equals(id)))
+        .filter(invoice -> invoice.getBuyer().getId().equals(id))
         .collect(Collectors.toList());
   }
 
@@ -52,7 +52,7 @@ public class InvoiceService {
     log.debug("Getting all invoices by seller: {}", id);
     return invoiceRepository.findAll()
         .stream()
-        .filter(invoice -> (invoice.getSeller().getId().equals(id)))
+        .filter(invoice -> invoice.getSeller().getId().equals(id))
         .collect(Collectors.toList());
   }
 
