@@ -32,11 +32,12 @@ import pl.lukasz.service.InvoiceService;
 @Slf4j
 @RequestMapping("/invoices")
 @Api(value = "/invoices", description = "Available operations for invoice application", tags = {"Invoices"})
-public class InvoiceController {
+public class InvoiceController implements InvoiceControllerApi {
 
   @NonNull
   private final InvoiceService invoiceService;
 
+  @Override
   @GetMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
   @ApiOperation(value = "Get a single invoice", notes = "Gets an invoice by id", response = Invoice.class)
@@ -45,7 +46,7 @@ public class InvoiceController {
       @ApiResponse(code = 200, message = "OK"),
       @ApiResponse(code = 404, message = "Invoice not found for passed id."),
       @ApiResponse(code = 500, message = "Internal server error.")})
-  ResponseEntity<?> getInvoiceById(@PathVariable Long id) {
+  public ResponseEntity<?> getInvoiceById(@PathVariable Long id) {
     log.debug("Getting an invoice by id: {}", id);
     Optional<Invoice> invoice = invoiceService.getInvoice(id);
     if (invoice.isEmpty()) {
@@ -55,18 +56,20 @@ public class InvoiceController {
     return ResponseEntity.ok().body(invoice.get());
   }
 
+  @Override
   @GetMapping()
   @ResponseStatus(HttpStatus.OK)
   @ApiOperation(value = "Get all invoices", response = Invoice.class, responseContainer = "List")
   @ApiResponses({
       @ApiResponse(code = 200, message = "OK"),
       @ApiResponse(code = 500, message = "Internal server error.")})
-  ResponseEntity<?> getAllInvoices() {
+  public ResponseEntity<?> getAllInvoices() {
     log.debug("Getting all invoices");
     Collection<Invoice> invoices = invoiceService.getAllInvoices();
     return ResponseEntity.status(HttpStatus.OK).body(invoices);
   }
 
+  @Override
   @GetMapping("/byDate")
   @ResponseStatus(HttpStatus.OK)
   @ApiOperation(value = "Get all invoices by dates", notes = "Gets all invoices issued between specified dates (inclusive) fromDate and toDate.",
@@ -78,7 +81,7 @@ public class InvoiceController {
       @ApiResponse(code = 200, message = "OK"),
       @ApiResponse(code = 400, message = "Passed dates are invalid."),
       @ApiResponse(code = 500, message = "Internal server error.")})
-  ResponseEntity<?> getInvoicesByDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fromDate,
+  public ResponseEntity<?> getInvoicesByDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fromDate,
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate toDate) {
     if (fromDate == null) {
       String message = "fromDate parameter cannot be null.";
@@ -100,6 +103,7 @@ public class InvoiceController {
     return ResponseEntity.status(HttpStatus.OK).body(invoices);
   }
 
+  @Override
   @GetMapping("/byBuyer")
   @ResponseStatus(HttpStatus.OK)
   @ApiOperation(value = "Get all invoices by buyer", notes = "Gets all invoices issued to specified buyer.", response = Invoice.class, responseContainer = "List")
@@ -108,7 +112,7 @@ public class InvoiceController {
       @ApiResponse(code = 200, message = "OK"),
       @ApiResponse(code = 400, message = "Passed buyer id is invalid."),
       @ApiResponse(code = 500, message = "Internal server error.")})
-  ResponseEntity<?> getInvoicesByBuyer(@RequestParam Long id) {
+  public ResponseEntity<?> getInvoicesByBuyer(@RequestParam Long id) {
     if (id == null) {
       String message = "Buyer id cannot be null.";
       log.error(message);
@@ -119,6 +123,7 @@ public class InvoiceController {
     return ResponseEntity.status(HttpStatus.OK).body(invoices);
   }
 
+  @Override
   @GetMapping("/bySeller")
   @ResponseStatus(HttpStatus.OK)
   @ApiOperation(value = "Get all invoices by seller", notes = "Gets all invoices issued to specified seller.", response = Invoice.class, responseContainer = "List")
@@ -127,7 +132,7 @@ public class InvoiceController {
       @ApiResponse(code = 200, message = "OK"),
       @ApiResponse(code = 400, message = "Passed seller id is invalid."),
       @ApiResponse(code = 500, message = "Internal server error.")})
-  ResponseEntity<?> getInvoicesBySeller(@RequestParam Long id) {
+  public ResponseEntity<?> getInvoicesBySeller(@RequestParam Long id) {
     if (id == null) {
       String message = "Seller id cannot be null.";
       log.error(message);
@@ -138,6 +143,7 @@ public class InvoiceController {
     return ResponseEntity.status(HttpStatus.OK).body(invoices);
   }
 
+  @Override
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
   @ApiOperation(value = "Delete an invoice by id", notes = "Deletes invoice by specified id from database.")
@@ -146,7 +152,7 @@ public class InvoiceController {
       @ApiResponse(code = 200, message = "OK"),
       @ApiResponse(code = 404, message = "Invoice not found for passed id."),
       @ApiResponse(code = 500, message = "Internal server error.")})
-  ResponseEntity<?> deleteInvoice(@PathVariable Long id) {
+  public ResponseEntity<?> deleteInvoice(@PathVariable Long id) {
     log.debug("Deleting invoice by id: {}", id);
     Optional<Invoice> invoice = invoiceService.getInvoice(id);
     if (invoice.isEmpty()) {
@@ -157,18 +163,20 @@ public class InvoiceController {
     return ResponseEntity.status(HttpStatus.OK).body(invoice.get());
   }
 
+  @Override
   @DeleteMapping
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @ApiOperation(value = "Delete ALL invoices", notes = "WARNING!!! This operation deletes ALL available invoices from database.")
   @ApiResponses({
       @ApiResponse(code = 204, message = "OK"),
       @ApiResponse(code = 500, message = "Internal server error.")})
-  ResponseEntity<?> deleteAllInvoices() {
+  public ResponseEntity<?> deleteAllInvoices() {
     log.debug("Deleting all invoices");
     invoiceService.deleteAllInvoices();
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 
+  @Override
   @PostMapping
   @ResponseStatus(HttpStatus.OK)
   @ApiOperation(value = "When invoice id field is not set application saves the invoice to database as new invoice,"
@@ -177,7 +185,7 @@ public class InvoiceController {
       @ApiResponse(code = 200, message = "OK"),
       @ApiResponse(code = 400, message = "Passed invoice is invalid."),
       @ApiResponse(code = 500, message = "Internal server error.")})
-  ResponseEntity<?> saveInvoice(@RequestBody(required = false) Invoice invoice) {
+  public ResponseEntity<?> saveInvoice(@RequestBody(required = false) Invoice invoice) {
     // TODO: 21/08/2020  add validation  against:  max length, empty string etc
     if (invoice == null) {
       String message = "Invoice cannot be null.";
