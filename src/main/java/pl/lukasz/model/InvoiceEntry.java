@@ -8,15 +8,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.Value;
 
-@Getter
-@EqualsAndHashCode
 @AllArgsConstructor
+@Value
 @ApiModel(value = "Invoice entry")
 @Entity
-public class InvoiceEntry {
+@SuppressWarnings("PMD.NullAssignment")
+public final class InvoiceEntry {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,7 +43,7 @@ public class InvoiceEntry {
   @ApiModelProperty(value = "VAT rate to be applied to net value ie. 0.23 means 23% VAT", example = "RATE_23")
   private final Vat vatRate;
 
-  private InvoiceEntry() {
+  InvoiceEntry() {
     this.id = null;
     this.productName = null;
     this.quantity = 0;
