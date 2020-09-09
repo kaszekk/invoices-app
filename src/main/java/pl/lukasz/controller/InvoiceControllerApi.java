@@ -22,6 +22,9 @@ import pl.lukasz.model.Invoice;
 @CrossOrigin
 public interface InvoiceControllerApi {
 
+  String TO_DATE = "toDate";
+  String FROM_DATE = "fromDate";
+
   String CONTAINER_LIST = "List";
   String INTERNAL_SERVER_ERROR = "Internal server error.";
 
@@ -48,8 +51,8 @@ public interface InvoiceControllerApi {
   @ApiOperation(value = "Get all invoices by dates", notes = "Gets all invoices issued between specified dates (inclusive) fromDate and toDate.",
       response = Invoice.class, responseContainer = CONTAINER_LIST)
   @ApiImplicitParams({
-      @ApiImplicitParam(name = "fromDate", value = "YYYY-MM-DD", example = "2020-03-23"),
-      @ApiImplicitParam(name = "toDate", value = "YYYY-MM-DD", example = "2020-05-04")})
+      @ApiImplicitParam(name = FROM_DATE, value = "YYYY-MM-DD", example = "2020-03-23"),
+      @ApiImplicitParam(name = TO_DATE, value = "YYYY-MM-DD", example = "2020-05-04")})
   @ApiResponses({
       @ApiResponse(code = 200, message = "OK"),
       @ApiResponse(code = 400, message = "Passed dates are invalid."),

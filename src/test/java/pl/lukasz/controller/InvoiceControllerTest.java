@@ -7,6 +7,8 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static pl.lukasz.controller.InvoiceControllerApi.FROM_DATE;
+import static pl.lukasz.controller.InvoiceControllerApi.TO_DATE;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -119,8 +121,8 @@ class InvoiceControllerTest {
     // When
     MvcResult result = mockMvc.perform(
         get("/invoices/byDate")
-            .param("fromDate", fromDate)
-            .param("toDate", toDate)
+            .param(FROM_DATE, fromDate)
+            .param(TO_DATE, toDate)
             .accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
@@ -142,8 +144,8 @@ class InvoiceControllerTest {
     // When
     MvcResult result = mockMvc.perform(
         get("/invoices/byDate")
-            .param("fromDate", fromDate)
-            .param("toDate", toDate)
+            .param(FROM_DATE, fromDate)
+            .param(TO_DATE, toDate)
             .accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
@@ -162,8 +164,8 @@ class InvoiceControllerTest {
     // When
     MvcResult result = mockMvc.perform(
         get("/invoices/byDate")
-            .param("fromDate", "")
-            .param("toDate", toDate)
+            .param(FROM_DATE, "")
+            .param(TO_DATE, toDate)
             .accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();
@@ -182,8 +184,8 @@ class InvoiceControllerTest {
     // When
     MvcResult result = mockMvc.perform(
         get("/invoices/byDate")
-            .param("fromDate", fromDate)
-            .param("toDate", "")
+            .param(FROM_DATE, fromDate)
+            .param(TO_DATE, "")
             .accept(MediaType.APPLICATION_JSON_VALUE))
         .andReturn();
     int actualHttpStatus = result.getResponse().getStatus();

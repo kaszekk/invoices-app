@@ -31,12 +31,12 @@ public class InvoiceController implements InvoiceControllerApi {
   @Override
   public ResponseEntity<?> getInvoiceById(@PathVariable Long id) {
     log.debug("Getting an invoice by id: {}", id);
-    Optional<Invoice> invoice = invoiceService.getInvoice(id);
-    if (invoice.isEmpty()) {
+    Optional<Invoice> invoiceOptional = invoiceService.getInvoice(id);
+    if (invoiceOptional.isEmpty()) {
       log.error("An error occurred during getting an invoice, invoice not found for passed id: {}", id);
       return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
-    return ResponseEntity.ok().body(invoice.get());
+    return ResponseEntity.ok().body(invoiceOptional.get());
   }
 
   @Override
@@ -96,13 +96,13 @@ public class InvoiceController implements InvoiceControllerApi {
   @Override
   public ResponseEntity<?> deleteInvoice(@PathVariable Long id) {
     log.debug("Deleting invoice by id: {}", id);
-    Optional<Invoice> invoice = invoiceService.getInvoice(id);
-    if (invoice.isEmpty()) {
+    Optional<Invoice> invoiceOptional = invoiceService.getInvoice(id);
+    if (invoiceOptional.isEmpty()) {
       log.error("An error occurred during deleting an invoice, invoice not found for passed id: {}", id);
       return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
     invoiceService.deleteInvoice(id);
-    return ResponseEntity.status(HttpStatus.OK).body(invoice.get());
+    return ResponseEntity.status(HttpStatus.OK).body(invoiceOptional.get());
   }
 
   @Override
