@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static pl.lukasz.controller.InvoiceControllerApi.FROM_DATE;
+import static pl.lukasz.controller.InvoiceControllerApi.TO_DATE;
 import static pl.lukasz.service.InvoiceService.FROM_DATE_CANNOT_BE_AFTER_TO_DATE;
 
 import java.time.LocalDate;
@@ -126,14 +128,14 @@ class InvoiceServiceTest {
   void shouldThrowExceptionForNullAsFromDate() {
     final Throwable exception = assertThrows(NullPointerException.class,
         () -> invoiceService.getAllInvoicesByDate(null, LocalDate.of(2018, 4, 11)));
-    assertEquals("fromDate" + IS_MARKED_NON_NULL_BUT_IS_NULL, exception.getMessage());
+    assertEquals(FROM_DATE + IS_MARKED_NON_NULL_BUT_IS_NULL, exception.getMessage());
   }
 
   @Test
   void shouldThrowExceptionForNullAsToDate() {
     final Throwable exception = assertThrows(NullPointerException.class,
         () -> invoiceService.getAllInvoicesByDate(LocalDate.of(2016, 4, 21), null));
-    assertEquals("toDate" + IS_MARKED_NON_NULL_BUT_IS_NULL, exception.getMessage());
+    assertEquals(TO_DATE + IS_MARKED_NON_NULL_BUT_IS_NULL, exception.getMessage());
   }
 
   @Test
