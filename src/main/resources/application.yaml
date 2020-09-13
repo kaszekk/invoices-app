@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+  properties:
+    hibernate:
+      jdbc:
+        lob:
+          non_contextual_creation: true
+
+logging:
+  level:
+    pl.lukasz:  DEBUG
+    org.hibernate.type: INFO
+    org.hibernate.SQL: INFO
+    org.springframework.transaction: INFO
+    org.springframework.web.servlet.mvc.method.annotation: INFO
